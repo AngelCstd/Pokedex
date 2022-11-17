@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es_MX">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,24 @@
     <title>pokedex</title>
     <link rel="stylesheet" href="../styles/pokedex.css">
 </head>
+
 <body>
     <div class="contenedor">
-        <input type="text" placeholder="Tu pokemon..." id="nombrePokemon">
-        <button onclick="buscarPokemon()">Buscar Pokemon</button>
+        <div class="contenedor__buscar">
+            <input type="text" placeholder="Tu pokemon..." id="nombrePokemon">
+            <button id="botonBuscar">Buscar</button>
+        </div>
         <div class="pokedex__contenedor">
+            <div class="main" id="main">
+                <img src="" id="imagenPokemon">
+                <div class="main__info">
+                    <p id="id__pokemon">#4 Pikachu</p>
+                    <p id="tipos__pokemon"><img src="" id="tipo1"><img src="" alt="" id="tipo2"></p>
+                    <p id="abilities__pokemon">fuegonazo  airezaso</p>
+                    <p id="evolucion__pokemon">Evoluciona de pichu</p>
+                </div>
+            </div>
             <input type="checkbox" id="check">
-            <img src="" id="imagenPokemon">
             <div class="pokedex__top">
             </div>
             <div class="pokedex__bottom">
@@ -22,4 +34,5 @@
     </div>
     <script src="../js/pokedex.js"></script>
 </body>
+
 </html>
