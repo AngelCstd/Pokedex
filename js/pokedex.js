@@ -1,5 +1,3 @@
-document.getElementById("botonBuscar").onclick = () => buscarPokemon();
-
 let tiposImg = new Map([
     ["normal", "https://images.wikidexcdn.net/mwuploads/wikidex/3/32/latest/20170114100442/Tipo_normal.gif"],
     ["fighting", "https://images.wikidexcdn.net/mwuploads/wikidex/b/b7/latest/20170114100336/Tipo_lucha.gif"],
@@ -21,12 +19,24 @@ let tiposImg = new Map([
     ["fairy", "https://images.wikidexcdn.net/mwuploads/wikidex/b/bc/latest/20170114100332/Tipo_hada.gif"]
 ]);
 
+document.getElementById("botonBuscar").addEventListener("click",()=>{
+    let pokeAbrir = document.getElementById("check");
+    const pokeInfo = document.getElementById("main");
+    
+    if (pokeInfo.style.display == 'grid') {
+        pokeAbrir.click();
+        setTimeout(() => pokeAbrir.click(), 1000);
+        pokeInfo.style.display = 'none';
+        setTimeout(() => pokeInfo.style.display = 'grid', 1200);
+    } else {
+        pokeAbrir.click();
+        setTimeout(() => pokeInfo.style.display = 'grid', 500);
+    };
+    
+    buscarPokemon();
+});
+
 async function buscarPokemon() {
-
-    abrirPokedex();
-
-    mostrarInfo();
-
     const nombrePokemonInput = document.getElementById("nombrePokemon");
     let nombrePokemon = nombrePokemonInput.value.toLowerCase();
     const url = "https://pokeapi.co/api/v2/pokemon/" + nombrePokemon
@@ -58,26 +68,6 @@ async function buscarPokemon() {
     };
 };
 
-function abrirPokedex() {
-    let pokeAbrir = document.getElementById("check");
-    if (pokeAbrir.checked == true) {
-        pokeAbrir.click();
-        setTimeout(() => pokeAbrir.click(), 1000);
-    } else {
-        pokeAbrir.click();
-    };
-};
-
-function mostrarInfo() {
-    let pokeInfo = document.getElementById("main");
-    if (pokeInfo.style.display == 'grid') {
-        pokeInfo.style.display = 'none';
-        setTimeout(() => pokeInfo.style.display = 'grid', 1200);
-    } else {
-        setTimeout(() => pokeInfo.style.display = 'grid', 500);
-    };
-};
-
 function pokeImg(url) {
     let pokemonImagen = document.getElementById("imagenPokemon");
     pokemonImagen.src = url;
@@ -103,9 +93,6 @@ function pokeTipo(types) {
 
 function pokeEvolution(evolucion) {
     let evolucionInfo = document.getElementById("evolucion__pokemon");
-    if (evolucion == null) {
-        evolucionInfo.innerHTML = "Este pokemon no tiene anteevolucion";
-    } else {
-        evolucionInfo.innerHTML = "Este pokemon es la evolucion de " + evolucion.name;
-    };
+    if (!evolucion == null) evolucionInfo.innerHTML = "Este pokemon es la evolucion de " + evolucion.name;
+    if (evolucion == null) evolucionInfo.innerHTML = "Este pokemon no tiene anteevolucion";
 }
