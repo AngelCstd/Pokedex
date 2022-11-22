@@ -19,10 +19,12 @@ let tiposImg = new Map([
     ["fairy", "https://images.wikidexcdn.net/mwuploads/wikidex/b/bc/latest/20170114100332/Tipo_hada.gif"]
 ]);
 
-document.getElementById("botonBuscar").addEventListener("click",()=>{
+document.getElementById("form").addEventListener("submit", (e) => e.preventDefault());
+
+document.getElementById("botonBuscar").addEventListener("click", () => {
     let pokeAbrir = document.getElementById("check");
     const pokeInfo = document.getElementById("main");
-    
+
     if (pokeInfo.style.display == 'grid') {
         pokeAbrir.click();
         setTimeout(() => pokeAbrir.click(), 1000);
@@ -32,7 +34,7 @@ document.getElementById("botonBuscar").addEventListener("click",()=>{
         pokeAbrir.click();
         setTimeout(() => pokeInfo.style.display = 'grid', 500);
     };
-    
+
     buscarPokemon();
 });
 
@@ -93,6 +95,6 @@ function pokeTipo(types) {
 
 function pokeEvolution(evolucion) {
     let evolucionInfo = document.getElementById("evolucion__pokemon");
-    if (!evolucion == null) evolucionInfo.innerHTML = "Este pokemon es la evolucion de " + evolucion.name;
+    if (evolucion != null) evolucionInfo.innerHTML = "Este pokemon es la evolucion de " + evolucion.name;
     if (evolucion == null) evolucionInfo.innerHTML = "Este pokemon no tiene anteevolucion";
 }
