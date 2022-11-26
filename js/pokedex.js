@@ -18,30 +18,27 @@ let tiposImg = new Map([
     ["dark", "https://images.wikidexcdn.net/mwuploads/wikidex/8/82/latest/20191118232327/Tipo_siniestro.gif"],
     ["fairy", "https://images.wikidexcdn.net/mwuploads/wikidex/b/bc/latest/20170114100332/Tipo_hada.gif"]
 ]);
+const pokeInfo = document.getElementById("main");
 
 document.getElementById("form").addEventListener("submit", (e) => e.preventDefault());
 
 document.getElementById("botonBuscar").addEventListener("click", () => {
-    let pokeAbrir = document.getElementById("check");
-    const pokeInfo = document.getElementById("main");
-
+    const pokeAbrir = document.getElementById("check");
     if (pokeInfo.style.display == 'grid') {
         pokeAbrir.click();
         setTimeout(() => pokeAbrir.click(), 1000);
-        pokeInfo.style.display = 'none';
-        setTimeout(() => pokeInfo.style.display = 'grid', 1200);
     } else {
         pokeAbrir.click();
-        setTimeout(() => pokeInfo.style.display = 'grid', 500);
-    };
-
+    }
     buscarPokemon();
 });
 
 async function buscarPokemon() {
     const nombrePokemonInput = document.getElementById("nombrePokemon");
     let nombrePokemon = nombrePokemonInput.value.toLowerCase();
-    const url = "https://pokeapi.co/api/v2/pokemon/" + nombrePokemon
+    const url = "https://pokeapi.co/api/v2/pokemon/" + nombrePokemon;
+
+    pokeInfo.style.display = 'none';
     let data = await fetch(url).then((res) => {
         if (res.status != "200") {
             console.log(res);
@@ -68,6 +65,8 @@ async function buscarPokemon() {
 
         pokeAbilities(data.abilities);
     };
+    setTimeout(()=>pokeInfo.style.display = 'grid',1000)
+    
 };
 
 function pokeImg(url) {
